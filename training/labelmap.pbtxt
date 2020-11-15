@@ -10,16 +10,13 @@ item {
 
 item {
   id: 3
-  name: 'shoulder bag'
+  name: 'bag'
 }
 
 item {
   id: 4
-  name: 'plastic bag'
+  name: 'people'
 }
 
-item {
-  id: 5
-  name: 'mobile phone'
-}
+
 
