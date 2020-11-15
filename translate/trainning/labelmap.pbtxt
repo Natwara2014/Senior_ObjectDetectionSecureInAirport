@@ -1,0 +1,25 @@
+item {
+  id: 1
+  name: 'luggage'
+}
+
+item {
+  id: 2
+  name: 'backpack'
+}
+
+item {
+  id: 3
+  name: 'shoulder bag'
+}
+
+item {
+  id: 4
+  name: 'plastic bag'
+}
+
+item {
+  id: 5
+  name: 'mobile phone'
+}
+
