@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Suspicious Object Detection for CEI</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+    <link href="{{ url_for('static',filename='css/materialize.min.css') }}" type="text/css" rel="stylesheet"
+        media="screen,projection" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.3.2/bootbox.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
+    <script src="https://kit.fontawesome.com/f5ad547ff3.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@600&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,600;1,300&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #6ccded;
+            font-family: Cloud;
+        }
+
+        .texttop {
+            font-size: 1.5rem;
+            color: white;            
+        }
+
+        .background {
+            background-color: white;
+        }
+
+        .text {
+            font-size: 1.2rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .padding {
+            padding: 1%;
+        }
+
+        th.dt-center,
+        td.dt-center {
+            text-align: center;
+        }
+    </style>
+
+    <script>
+        $(document).on("click", ".button-modal", function (e) {
+            e.preventDefault();
+
+            var _self = $(this);
+
+            var myImg = _self.data("id");
+            $("#getImg").attr("src", myImg);
+
+            $(_self.attr("href")).modal("show");
+        });
+    </script>
+    <!-- <script>
+        $(document).ready(function () {
+
+            var dataSet = [
+                {
+                    "date": "29/06/2020",
+                    "time": "10:32",
+                }
+            ];
+
+            var table = $('#myTable').DataTable({
+                responsive: true,       //for responsive column display
+                deferRender: true,      //if large data, use this option
+                data: dataSet,
+                columns: [
+                    { data: "date", title: "Date" },
+                    { data: "time", title: "Time" },
+                    { title: "Picture", orderable: false, defaultContent: "<button class='btn btn-warning my-1'>View</button>" }
+
+                ],
+                columnDefs: [
+                    // make the last column align right, also target: "_all"
+                    { "className": "dt-center", "targets": 2 }
+                ]
+            });
+        });
+    </script> -->
+</head>
+
+
+<body>
+
+    <div class="container-fluid padding">
+        <div class="row welcome text-center">
+            <div class="col-12">
+                <h2 class="texttop">Suspicious Object Detection with Deep Learning for CEI</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="background">
+        <div class="container p-3">
+            <h3 class="mb-3">Document <i class="fa fa-file" style="font-size:24px"></i></h3>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            <center>No.</center>
+                        </th>
+                        <th>
+                            <center>Date</center>
+                        </th>
+                        <th>
+                            <center>Time</center>
+                        </th>
+                        <th>
+                            <center>Picture</center>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>                 
+                    {% for row in datas %}
+                    <tr>
+                        <td>
+                            <center>
+                                {{loop.index}}
+                            </center>
+                        </td>
+                        <td>
+                            <center>
+                                {{row.1}}
+                            </center>
+                        </td>
+                        <td>
+                            <center>
+                                {{row.2}}
+                            </center>
+                        </td>
+                        <td>
+                        <center>
+                            <a data-id="{{'/static/ImgDetect/' + row.3}}" title="Show Image"
+                                class="button-modal icontf" href="#myModal"><i class="fas fa-image"></i></a>
+                        </center>
+                    </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="modal" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">
+                                Object Detection
+                            </h4>
+                            <button type="button" class="close" data-dismiss="modal">
+                                &times;
+                            </button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <center>
+                                <img id="getImg" src="" alt="ImageDetection" width=100% />
+                            </center>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <div class="col-12 text text-center">
+        <p>Contact Tel : 0-5379-8000 , 0-5379-8999 <br>
+            ท่าอากาศยานนานาชาติแม่ฟ้าหลวง เชียงราย
+            404 หมู่ 10 ตำบลบ้านดู่ อำเภอเมือง จังหวัดเชียงราย 57100
+        </p>
+    </div>
+
+    <hr align="center" color="#3b98d3" width="1000px">
+
+    <div class="col-md-12 text-center">
+        <p class="text">Copyright © 2020 Mae Fah Luang - Chiang Rai International Airport</p>
+    </div>
+
+</body>
+
+</html>
